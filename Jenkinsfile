@@ -1,17 +1,22 @@
 pipeline {
     agent any
 
+    // Define variables for Docker image and tag
     environment {
-        imageName = "kingshuk0311/vivek5"
-        imageTag = "v11980"
+        imageName = "kingshuk0311/siemens"
+        imageTag = "v${env.BUILD_ID}"
         dockerfile = "./Dockerfile"
+        SSH_CREDENTIALS = credentials('kopssiemensid')  // Replace with your SSH credential ID
+        KOPS_CLUSTER_NAME = 'kingshuk.shop'
+        KOPS_INSTANCE_IP = 'ip-172.31.32.55' 
     }
 
+    
     stages {
         stage('Checkout') {
             steps {
                 script {
-                    git branch: 'main', credentialsId: 'gitid', url: 'https://github.com/mahatokingshuk1103/vivek.git'
+                    git branch: 'main', credentialsId: 'gitid', url: 'https://github.com/mahatokingshuk1103/Siemens_ETL_Weather_Measurement_Project.git'
                 }
             }
         }
@@ -19,30 +24,24 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    def imageName = "kingshuk0311/vivek5"
-                    def imageTag = "v11980"
-
-                    sh "sudo -S docker build -t ${imageName}:${imageTag} ."
+                    // Build the Docker image using the defined variables
+                    sh "sudo -S docker build -t ${imageName}:${imageTag} -f ${dockerfile} ."
                     echo "${imageName}:${imageTag}"
                 }
             }
         }
 
-        stage('Push Image Dockerhub') {
+        stage('Push Image to Docker Hub') {
             steps {
                 script {
+                    // Log in to Docker Hub using credentials
                     withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerhubpwd')]) {
                         sh "sudo docker login -u kingshuk0311 -p \${dockerhubpwd}"
                     }
+
+                    // Push the Docker image to Docker Hub
                     sh "sudo docker push ${imageName}:${imageTag}"
                 }
-            }
-        }
-
-        stage('Docker Pull') {
-            steps {
-                sh 'sudo docker pull kingshuk0311/vivek5:v11980'
-                echo "Pulled successfully"
             }
         }
 
@@ -50,11 +49,10 @@ pipeline {
             agent { label 'dev' }
             steps {
                 script {
-                  def helmCmd = "helm upgrade --install --namespace=test3  foptgwetherking-stack helm/wprofilecharts --set appimage=kingshuk0311/vivek5:v11980"
                   
-
-                  sh(helmCmd)
-
+                    sh "helm upgrade --install --force wetherking100-stack helm/wprofilecharts --set appimage=kingshuk0311/vivek5:v12 --namespace prod5"
+                    
+                    
                 }
             }
         }

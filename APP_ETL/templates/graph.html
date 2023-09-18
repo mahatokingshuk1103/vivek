@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Humidity vs. Temperature Chart</title>
+    <!-- Include Chart.js for chart rendering -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <style>
+        /* Apply some basic styles */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+
+        h1 {
+            color: blue; /* Change the title color to blue */
+        }
+
+        /* Style the chart container */
+        #chart-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            margin: 20px auto;
+            max-width: 800px;
+        }
+
+        /* Style the canvas element */
+        canvas {
+            width: 100%;
+            height: auto;
+        }
+
+        /* Style for the maximize and minimize buttons */
+        .chart-button {
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: #008CBA;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Humidity vs. Temperature</h1>
+
+    <!-- Chart container -->
+    <div id="chart-container">
+        <canvas id="humidityTemperatureChart"></canvas>
+        <button class="chart-button" id="maximizeButton">Maximize</button>
+        <button class="chart-button" id="minimizeButton">Minimize</button>
+    </div>
+
+    <script>
+        // JavaScript code for chart rendering (same as your original code)
+        var data_json = {{ data_json|safe }};
+        var timeLabels = data_json.map(function(point) {
+            return point.time;
+        });
+        var humidityData = data_json.map(function(point) {
+            return point.humidity;
+        });
+        var temperatureData = data_json.map(function(point) {
+            return point.temperature;
+        });
+
+        var ctx = document.getElementById('humidityTemperatureChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: timeLabels,
+                datasets: [{
+                    label: 'Humidity (%)',
+                    data: humidityData,
+                    borderColor: 'blue', // Set the line color to blue
+                    backgroundColor: 'rgba(0, 0, 255, 0.1)',
+                    yAxisID: 'humidity-y-axis',
+                }, {
+                    label: 'Temperature (°C)',
+                    data: temperatureData,
+                    borderColor: 'red',
+                    backgroundColor: 'rgba(255, 0, 0, 0.1)',
+                    yAxisID: 'temperature-y-axis',
+                }],
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        position: 'left',
+                        title: {
+                            display: true,
+                            text: 'Humidity (%) and Temperature (°C)',
+                        },
+                        grid: {
+                            display: true,
+                        },
+                    },
+                },
+            },
+        });
+
+        // Maximize button functionality
+        document.getElementById('maximizeButton').addEventListener('click', function() {
+            var chartContainer = document.getElementById('chart-container');
+            chartContainer.style.maxWidth = '100%'; // Expand to full width
+        });
+
+        // Minimize button functionality
+        document.getElementById('minimizeButton').addEventListener('click', function() {
+            var chartContainer = document.getElementById('chart-container');
+            chartContainer.style.maxWidth = '800px'; // Set back to the original max width
+        });
+    </script>
+</body>
+</html>

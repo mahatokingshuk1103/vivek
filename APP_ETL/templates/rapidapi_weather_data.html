@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather App</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #f8f9fa; /* Light gray background */
+            font-family: Arial, sans-serif;
+            padding-top: 20px;
+        }
+
+        .container {
+            background-color: #fff; /* White container background */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: #eff3f8; /* Blue header text color */
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: #333; /* Dark gray section header text color */
+        }
+
+        ul.list-group {
+            margin-top: 20px;
+        }
+
+        .list-group-item {
+            background-color: #f0f0f0; /* Light gray list item background */
+        }
+
+        img.img-fluid {
+            display: block;
+            margin: 20px auto;
+            max-width: 100%;
+        }
+        .title-box {
+            background-color: #008CBA; /* Set background color for the title box */
+            padding: 20px; /* Add padding to the title box */
+            border-radius: 10px; /* Rounded corners */
+            margin-bottom: 20px; /* Add space below the title box */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <div class="title-box">
+            <h1>LIVE WEATHER REPORT</h1>
+        </div>
+        
+
+        <section>
+            <h2>Current Location</h2>
+            <ul class="list-group">
+                <li class="list-group-item"><strong>Location:</strong> {{ weather_data.location.name }}</li>
+                <li class="list-group-item"><strong>Region:</strong> {{ weather_data.location.region }}</li>
+                <li class="list-group-item"><strong>Country:</strong> {{ weather_data.location.country }}</li>
+                <li class="list-group-item"><strong>Latitude:</strong> {{ weather_data.location.lat }}</li>
+                <li class="list-group-item"><strong>Longitude:</strong> {{ weather_data.location.lon }}</li>
+                <li class="list-group-item"><strong>Local Time:</strong> {{ weather_data.location.localtime }}</li>
+                <li class="list-group-item"><strong>Tz-id:</strong> {{ weather_data.location.tz_id }}</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Current Temperature</h2>
+            <ul class="list-group">
+                <li class="list-group-item"><strong>Last Updated Epoch:</strong> {{ weather_data.current.last_updated_epoch }}</li>
+                <li class="list-group-item"><strong>Last Updated:</strong> {{ weather_data.current.last_updated }}</li>
+                <li class="list-group-item"><strong>Current Temperature Celsius:</strong> {{ weather_data.current.temp_c }}°C</li>
+                <li class="list-group-item"><strong>Current Temperature Fahrenheit:</strong> {{ weather_data.current.temp_f }}°F</li>
+                <li class="list-group-item"><strong>Is Day:</strong> {{ weather_data.current.is_day }}</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Current Weather Condition</h2>
+            <ul class="list-group">
+                <li class="list-group-item"><strong>Condition:</strong> {{ weather_data.current.condition.text }}</li>
+                <li class="list-group-item"><strong>Wind MPH:</strong> {{ weather_data.current.wind_mph }}</li>
+                <li class="list-group-item"><strong>Wind KPH:</strong> {{ weather_data.current.wind_kph }}</li>
+            </ul>
+            <img src="{{ weather_data.current.condition.icon }}" alt="{{ weather_data.current.condition.text }}" class="img-fluid">
+        </section>
+    </div>
+
+    <!-- Include Bootstrap JS and jQuery (optional) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

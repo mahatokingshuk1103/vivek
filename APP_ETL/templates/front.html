@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siemens Weather Measurement</title>
+    <style>
+        /* Reset some default styles */
+        body, h1, h2 {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #c7d3d4; /* Set a light blue background color */
+        }
+
+        /* Container for horizontal cards */
+        .card-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            flex-wrap: wrap; /* Wrap cards to the next line when needed */
+            padding: 20px; /* Add some padding for better spacing */
+        }
+
+        /* Box for the title */
+        .title-box {
+            background-color: #008CBA; /* Set background color for the title box */
+            padding: 20px; /* Add padding to the title box */
+            border-radius: 10px; /* Rounded corners */
+            margin-bottom: 20px; /* Add space below the title box */
+        }
+
+        /* Card styling */
+        .card {
+            flex-basis: calc(33.33% - 20px); /* Set card width to 33.33% of container width */
+            border-radius: 10px;
+            padding: 10px;
+            margin: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            background-color: #FFFFF7; /* Set a very light brown background color for cards */
+            background-image: url('periwinkle-image.jpg'); /* Set the periwinkle background image */
+            background-size: cover; /* Cover the entire card with the background image */
+            background-repeat: no-repeat; /* Prevent background image from repeating */
+            transition: background-color 0.3s;
+        }
+
+        /* Heading styles */
+        h1 {
+            font-family: "Georgia", serif; /* Change the font to Georgia */
+            color: white; /* Change the color to white */
+            margin-bottom: 20px; /* Add space below the heading */
+        }
+
+        h2 {
+            color: #008CBA; /* White text color for headings */
+        }
+
+        /* Button styles */
+        button {
+            background-color: #008CBA;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #005F7F;
+        }
+
+        /* Link styles */
+        a {
+            text-decoration: none;
+        }
+
+        /* Footer styles */
+        footer {
+            background-color: #008CBA;
+            color: white;
+            padding: 2px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="title-box">
+        <h1>SIEMENS WEATHER MEASUREMENT</h1>
+    </div>
+
+    <div class="card-container">
+        <div class="card">
+            <h2>Current Weather Report (Data Extracted FROM RAPIDAPI)</h2>
+            <div> 
+                <button id="redirectButton3">Click Here</button>
+                    <script>
+                           // Add an event listener to the button
+                           document.getElementById("redirectButton3").addEventListener("click", function () {
+                               // Redirect to another HTML page (e.g., page2.html)
+                               window.location.href = "rapid_show/";
+                           });
+                       </script>
+               </div>
+        </div>
+        </a>
+        <div class="card">
+            <h2>  SHOW DATA</h2>
+            <div> 
+                <button id="redirectButton1">Click Here</button>
+                    <script>
+                           // Add an event listener to the button
+                           document.getElementById("redirectButton1").addEventListener("click", function () {
+                               // Redirect to another HTML page (e.g., page2.html)
+                               window.location.href = "show_data/";
+                           });
+                       </script>
+        </div>
+        </div>
+
+        <div class="card">
+           <h2>Upload Data from Excel Sheet (EXCEL DATA)</h2>
+         <div> 
+         <button id="redirectButton2">Click Here</button>
+             <script>
+                    // Add an event listener to the button
+                    document.getElementById("redirectButton2").addEventListener("click", function () {
+                        // Redirect to another HTML page (e.g., page2.html)
+                        window.location.href = "excel_upload/";
+                    });
+                </script>
+        </div>
+        </div>
+
+        <div class="card">
+             <h2>Show in Graphical Representation</h2>
+            <div> 
+                <button id="redirectButton6">Click Here</button>
+                    <script>
+                           // Add an event listener to the button
+                           document.getElementById("redirectButton6").addEventListener("click", function () {
+                               // Redirect to another HTML page (e.g., page2.html)
+                               window.location.href = "graph/";
+                           });
+                    </script>
+               </div>
+        </div>
+
+        <div class="card">
+           <h2>Click here to access the data from QR Code</h2>
+            <div> 
+                <button id="redirectButton4">Click Here</button>
+                    <script>
+                           // Add an event listener to the button
+                           document.getElementById("redirectButton4").addEventListener("click", function () {
+                               // Redirect to another HTML page (e.g., page2.html)
+                               window.location.href = "generate_qr/1/";
+                           });
+                       </script>
+               </div>
+            
+        </div>
+
+        <div class="card">
+            <h2>Login in Database admin</h2>
+              <div> 
+                <button id="redirectButton5">Click Here</button>
+                    <script>
+                           // Add an event listener to the button
+                           document.getElementById("redirectButton5").addEventListener("click", function () {
+                               // Redirect to another HTML page (e.g., page2.html)
+                               window.location.href = "admin/";
+                           });
+                       </script>
+               </div>
+        </div>
+    
+ </div>
+
+    <!-- Footer section -->
+    <footer>
+        <p>Contact Us:</p>
+        <p>Phone: +1 (123) 456-7890</p>
+        <p>Email: siemens.weather@gmail.com</p>
+    </footer>
+</body>
+</html>

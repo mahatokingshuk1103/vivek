@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Weather Form</title>
+    <style>
+        body {
+            background-color: #e0f7fa; /* Light blue background */
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        
+        .form-container {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        input[type="text"],
+        input[type="password"],
+        select {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 16px;
+        }
+        
+        button[type="submit"] {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        
+        /* New styles for the table */
+        .table-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 300px;
+        }
+        
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+        
+        th {
+            background-color: #007BFF;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Enter the Longitude and latitude of your Location</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <a href="https://www.latlong.net/">Get your Longitude and Latitude</a>
+
+    <!-- Table moved to top right corner -->
+    <div class="table-container">
+        <table>
+            <tr>
+                <th>Location</th>
+                <th>Latitude, Longitude</th>
+            </tr>
+            <tr>
+                <td>Bangalore,Karnataka</td>
+                <td>12.971599 , 77.594566</td>
+            </tr>
+            <tr>
+                <td>Berlin,Germany</td>
+                <td>52.5200 , 13.4050</td>
+            </tr>
+            <tr>
+                <td>Boston,US</td>
+                <td>42.3601 , -71.0589</td>
+            </tr>
+            <tr>
+                <td>Tokyo,Japan</td>
+                <td>35.6762 , 139.6503</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

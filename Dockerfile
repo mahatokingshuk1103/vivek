@@ -1,28 +1,20 @@
 # Use an official Python runtime as a parent image
-FROM python:3.8
-
-# Set environment variables for Django
-ENV DJANGO_SETTINGS_MODULE=myapp.settings
-ENV PYTHONUNBUFFERED=1
-
-# Create and set the working directory in the container
-RUN mkdir /app
+FROM python:3.8-slim
+# Set the working directory in the container
 WORKDIR /app
 
-# Copy the requirements.txt file into the container
+# Copy the requirements file into the container at /app
 COPY requirements.txt /app/
 
-# Install Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+# Install any needed packages specified in requirements.txt
+RUN pip install -r requirements.txt
 
-# Copy the rest of the application code into the container
+# Copy the current directory contents into the container at /app
 COPY . /app/
+RUN python manage.py migrate
 
-# Collect static files (if applicable)
-RUN python manage.py collectstatic --noinput
-
-# Expose the port the application will run on
+# Expose port 8000 to the outside world
 EXPOSE 8000
 
-# Start the Django application using Gunicorn (adjust the command as needed)
-CMD ["gunicorn", "myapp.wsgi:application", "--bind", "0.0.0.0:8000"]
+# Run the Django development server
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"

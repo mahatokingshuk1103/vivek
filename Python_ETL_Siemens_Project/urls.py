@@ -38,7 +38,7 @@ urlpatterns = [
 
 
     #QR CODE GENERATOR
-    path('generate_qr/<int:item_id>/', generate_qr_code_view, name='generate_qr_code'),
+    path('generate_qr/<int:item_id>/', generate_qr_code_view, name='generate_qr_code_view'),
 
 
     #GRAPH View
@@ -52,6 +52,7 @@ urlpatterns = [
 
     #Data show 
     path('show_data/',display_data_database, name='display_data_database'),
+    
     
 
 ]

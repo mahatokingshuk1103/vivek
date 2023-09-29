@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.shortcuts import render, redirect
 import requests
 from .forms import ExcelUploadForm
@@ -9,19 +8,9 @@ import json
 import random
 import time
 import qrcode
-from django.shortcuts import render
-import qrcode
 from django.http import HttpResponse
 from io import BytesIO
 from PIL import Image
-
-
-#DATA FETCHING FROM RAPIDAPI
-
-# myapp/views.py
-from django.shortcuts import render, redirect
-import requests
-
 from .forms import WeatherForm  # Import your form
 
 def rapidapi_weather_view(request):
@@ -142,6 +131,10 @@ def generate_qr_code_view(request, item_id):
     response = HttpResponse(content_type="image/png")
     img.save(response, "PNG")
     return response
+
+
+
+
 
 #GRAPH View
 

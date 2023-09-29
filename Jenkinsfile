@@ -45,14 +45,11 @@ pipeline {
             }
         }
 
-        stage('Deploy to Kubernetes') {
-            agent { label 'dev' }
+        stage('Deploy to EKS') {
+            
             steps {
                 script {
-                  
-                    sh "helm upgrade --install --force wetherking100-stack helm/wprofilecharts --set appimage=kingshuk0311/vivek5:v12 --namespace prod5"
-                    
-                    
+                  sh 'kubectl apply -f kubernetes/deployment.yaml' 
                 }
             }
         }

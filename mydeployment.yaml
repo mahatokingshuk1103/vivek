@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: my-django-container-2
-          image: kingshuk0311/siemens:v5
+          image: kingshuk0311/siemens:v${env.BUILD_ID}
           imagePullPolicy: Always
           ports:
             - containerPort: 8000

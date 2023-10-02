@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: my-django-container-2
-          image: ${imageName}:${imageTag}
+          image: kingshuk0311/siemens:{{IMAGE_TAG}}
           imagePullPolicy: Always
           ports:
             - containerPort: 8000

@@ -6,9 +6,7 @@ pipeline {
         imageName = "kingshuk0311/siemens"
         imageTag = "v${env.BUILD_ID}"
         dockerfile = "./Dockerfile"
-        SSH_CREDENTIALS = credentials('kopssiemensid')  // Replace with your SSH credential ID
-        KOPS_CLUSTER_NAME = 'kingshuk.shop'
-        KOPS_INSTANCE_IP = 'ip-172.31.32.55' 
+        
     }
 
     
@@ -35,7 +33,7 @@ pipeline {
             steps {
                 script {
                     // Log in to Docker Hub using credentials
-                    withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerhubpwd')]) {
+                    withCredentials([string(credentialsId: 'dockerhubpwd', variable: 'dockerhubpwd')]) {
                         sh "sudo docker login -u kingshuk0311 -p \${dockerhubpwd}"
                     }
 
@@ -46,12 +44,14 @@ pipeline {
         }
 
         stage('Deploy to Kubernetes') {
-            agent { label 'dev' }
+            
             steps {
                 script {
-                  
-                    sh "helm upgrade --install --force wetherking100-stack helm/wprofilecharts --set appimage=kingshuk0311/vivek5:v12 --namespace prod5"
-                    
+                sh'aws configure set aws_access_key_id AKIA2QOO2JP4YT72V7I3 && aws configure set aws_secret_access_key 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'
+                sh 'aws eks --region us-east-2 update-kubeconfig --name my-eks-cluster2' 
+                sh 'kubectl delete pods --all -n prod2'
+                sh "sed -i 's|{{IMAGE_TAG}}|${imageName}:${imageTag}|' mydeployment.yaml"
+                sh 'kubectl apply -f mydeployment.yaml --namespace=prod2'
                     
                 }
             }

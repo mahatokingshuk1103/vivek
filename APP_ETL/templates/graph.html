@@ -16,7 +16,7 @@
         }
 
         h1 {
-            color: blue; /* Change the title color to blue */
+            color: #641e8c; 
         }
 
         /* Style the chart container */
@@ -39,12 +39,14 @@
         .chart-button {
             margin: 10px;
             padding: 10px 20px;
-            background-color: #008CBA;
+            background-color: #641e8c;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
         }
+
+       
     </style>
 </head>
 <body>
@@ -58,8 +60,8 @@
     </div>
 
     <script>
-        // JavaScript code for chart rendering (same as your original code)
-        var data_json = {{ data_json|safe }};
+        // JavaScript code for chart rendering 
+        var data_json = {{ data_json|safe }};  //converting json variable in javascript variable
         var timeLabels = data_json.map(function(point) {
             return point.time;
         });

@@ -43,22 +43,17 @@ pipeline {
             }
         }
 
-        stage('Deploy to Kubernetes') {
+       stage('Deploy to Kubernetes') {
     steps {
-        withCredentials([string(credentialsId: 'AWSID', variable: 'AWS_CREDENTIALS')]) {
-            script {
-                sh '''
-                    aws configure set aws_access_key_id $AWS_CREDENTIALS
-                    aws configure set aws_secret_access_key $AWS_CREDENTIALS
-                '''
-                sh 'aws eks --region us-east-2 update-kubeconfig --name my-eks-cluster2'
+        script {
+            withAWS(credentials: 'AWSID', region: 'us-east-2') {
+                sh 'aws eks update-kubeconfig --name my-eks-cluster2'
                 sh 'kubectl delete pods --all -n prod2'
                 sh "sed -i 's|{{IMAGE_TAG}}|${imageName}:${imageTag}|' mydeployment.yaml"
                 sh 'kubectl apply -f mydeployment.yaml --namespace=prod2'
             }
         }
     }
-}
 
     }
 }

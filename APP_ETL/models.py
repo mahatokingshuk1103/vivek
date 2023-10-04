@@ -8,7 +8,7 @@ class Database_Siemens(models.Model):
 def __str__(self):
         return f"{self.time} - {self.humidity} - {self.temperature} "  
 '''
-#This enable string representation of Database
+This enable string representation of Database
  instance and make it human readiable
 
 '''

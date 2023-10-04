@@ -119,7 +119,7 @@ def upload_excel(request):
                                          humidity=row['humidity'], 
                                          temperature=row['temperature'], 
                                          )
-            return redirect('display_data')
+            return redirect('display_data_database')
     else:
         form = ExcelUploadForm()
     return render(request, 'upload_excel.html', {'form': form})

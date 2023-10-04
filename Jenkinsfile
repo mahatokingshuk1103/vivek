@@ -47,7 +47,7 @@ pipeline {
             
             steps {
                 script {
-                sh'aws configure set aws_access_key_id AKIA2QOO2JP43IJMEHNE && aws configure set aws_secret_access_key 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'
+                sh'aws configure set aws_access_key_id AKIA2QOO2JP4YCQQP447 && aws configure set aws_secret_access_key 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'
                 sh 'aws eks --region us-east-2 update-kubeconfig --name my-eks-cluster2' 
                 sh 'kubectl delete pods --all -n prod2'
                 sh "sed -i 's|{{IMAGE_TAG}}|${imageName}:${imageTag}|' mydeployment.yaml"
